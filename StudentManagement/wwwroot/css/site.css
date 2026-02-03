@@ -1,6 +1,4 @@
-/* =========================
-   GLOBAL RESET & BASE
-========================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -14,18 +12,12 @@ body {
   line-height: 1.6;
 }
 
-/* =========================
-   LAYOUT
-========================= */
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-/* =========================
-   HEADER / NAVBAR
-========================= */
 .header {
   background-color: #1f2937;
   color: #ffffff;
@@ -56,9 +48,7 @@ body {
   color: #ffffff;
 }
 
-/* =========================
-   MAIN CONTENT
-========================= */
+
 .content {
   background-color: #ffffff;
   margin-top: 24px;
@@ -66,17 +56,13 @@ body {
   border-radius: 6px;
 }
 
-/* =========================
-   PAGE HEADINGS
-========================= */
+
 h1, h2 {
   margin-bottom: 16px;
   color: #111827;
 }
 
-/* =========================
-   FILTER FORM
-========================= */
+
 form {
   margin-bottom: 16px;
 }
@@ -101,9 +87,7 @@ button:hover {
   background-color: #1d4ed8;
 }
 
-/* =========================
-   STUDENTS TABLE
-========================= */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -134,9 +118,7 @@ tr:hover {
   background-color: #dcfce7 !important;
 }
 
-/* =========================
-   ACTION LINK / BUTTON
-========================= */
+
 a.btn {
   display: inline-block;
   padding: 5px 10px;
@@ -152,9 +134,6 @@ a.btn:hover {
   color: #ffffff;
 }
 
-/* =========================
-   FOOTER
-========================= */
 .footer {
   margin-top: 40px;
   padding: 16px;
