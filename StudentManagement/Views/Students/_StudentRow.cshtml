@@ -1,0 +1,19 @@
+@model StudentManagement.Models.Student
+
+@{
+    var isTopper = Model.Marks >= 90;
+}
+
+<tr class="@(isTopper ? "table-success" : "")">
+    <td>@Model.Name</td>
+    <td>@Model.Course</td>
+    <td>@Model.Marks</td>
+    <td>
+        <a asp-action="Details"
+           asp-controller="Students"
+           asp-route-id="@Model.Id"
+           class="btn btn-sm btn-outline-primary">
+            View
+        </a>
+    </td>
+</tr>

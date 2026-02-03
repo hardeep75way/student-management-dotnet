@@ -1,0 +1,64 @@
+@model StudentManagement.ViewModels.StudentListViewModel
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h2 class="mb-4">Students</h2>
+
+<div class="row mb-3 align-items-end">
+    <div class="col-md-4">
+        <form method="get" class="d-flex gap-2">
+            <select name="course" class="form-select">
+                <option value="">All Courses</option>
+                @foreach (var course in Model.Courses)
+                {
+                    <option value="@course"
+                            selected="@(course == Model.SelectedCourse)">
+                        @course
+                    </option>
+                }
+            </select>
+            <button type="submit" class="btn btn-primary">
+                Filter
+            </button>
+        </form>
+    </div>
+
+    <div class="col-md-8 text-end">
+        <span class="text-muted">
+            Total Students:
+            <strong>@Model.TotalStudents</strong>
+        </span>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+        <tr>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Marks</th>
+            <th style="width: 120px;">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Students.Any())
+        {
+            <tr>
+                <td colspan="4" class="text-center text-muted">
+                    No students found.
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var student in Model.Students)
+            {
+                @await Html.PartialAsync("_StudentRow", student)
+            }
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,164 @@
+/* =========================
+   GLOBAL RESET & BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* =========================
+   HEADER / NAVBAR
+========================= */
+.header {
+  background-color: #1f2937;
+  color: #ffffff;
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.logo a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav a {
+  color: #d1d5db;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.nav a:hover {
+  color: #ffffff;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+.content {
+  background-color: #ffffff;
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 6px;
+}
+
+/* =========================
+   PAGE HEADINGS
+========================= */
+h1, h2 {
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+/* =========================
+   FILTER FORM
+========================= */
+form {
+  margin-bottom: 16px;
+}
+
+select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 6px 14px;
+  border: none;
+  background-color: #2563eb;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+/* =========================
+   STUDENTS TABLE
+========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+thead {
+  background-color: #f1f5f9;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  font-size: 14px;
+  color: #374151;
+}
+
+tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Topper highlight */
+.table-success {
+  background-color: #dcfce7 !important;
+}
+
+/* =========================
+   ACTION LINK / BUTTON
+========================= */
+a.btn {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 13px;
+  text-decoration: none;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+  border-radius: 4px;
+}
+
+a.btn:hover {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  margin-top: 40px;
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+}

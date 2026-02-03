@@ -1,0 +1,11 @@
+@model StudentManagement.Models.Student
+
+<h2>Student Details</h2>
+
+<ul>
+    <li><strong>Name:</strong> @Model.Name</li>
+    <li><strong>Course:</strong> @Model.Course</li>
+    <li><strong>Marks:</strong> @Model.Marks</li>
+</ul>
+
+<a asp-action="Index">Back to List</a>
