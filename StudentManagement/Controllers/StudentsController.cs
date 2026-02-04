@@ -16,25 +16,29 @@ public class StudentsController : Controller
     }
     
     [HttpGet]
-    public IActionResult Index(string? course)
+    public IActionResult Index(string course = "")
     {
         try
         {
+            var allStudents = _studentService.GetAllStudents();
 
             var students = string.IsNullOrEmpty(course)
-                ? _studentService.GetAllStudents()
+                ? allStudents
                 : _studentService.GetStudentsByCourse(course);
             
             var model = new StudentListViewModel
             {
                 Students = students,
-                Courses = _studentService.GetAllStudents()
+                Courses = allStudents
                     .Select(s => s.Course)
                     .Distinct()
                     .ToList(),
+                
                 TotalStudents = students.Count,
                 SelectedCourse = course
             };
+            
+            Console.WriteLine();
 
             return View(model);
         }
@@ -54,7 +58,7 @@ public class StudentsController : Controller
             var student = _studentService.GetStudentById(id);
 
             if (student == null)
-                return NotFound();
+                return BadRequest("Student Not Found");
 
             return View(student);
         }

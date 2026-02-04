@@ -1,10 +1,13 @@
-@model StudentManagement.Models.Student
+@model StudentManagement.DTO.StudentDTOs
 
 @{
     var isTopper = Model.Marks >= 90;
+    var rowStyle = isTopper
+        ? "background-color:#dcfce7;"
+        : "";
 }
 
-<tr class="@(isTopper ? "table-success" : "")">
+<tr style="@rowStyle">
     <td>@Model.Name</td>
     <td>@Model.Course</td>
     <td>@Model.Marks</td>
@@ -12,7 +15,14 @@
         <a asp-action="Details"
            asp-controller="Students"
            asp-route-id="@Model.Id"
-           class="btn btn-sm btn-outline-primary">
+           style="
+                padding:4px 10px;
+                border:1px solid #2563eb;
+                color:#2563eb;
+                text-decoration:none;
+                border-radius:4px;
+                font-size:13px;
+           ">
             View
         </a>
     </td>

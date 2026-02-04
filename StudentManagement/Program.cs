@@ -1,11 +1,19 @@
 using StudentManagement.Services;
 using StudentManagement.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IStudentService, StudentService>();
+// // builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        new MySqlServerVersion(new Version(8, 0, 34))
+    ));
 
 var app = builder.Build();
 
@@ -26,6 +34,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Students}/{action=Index}/{id?}");
 
 app.Run();
