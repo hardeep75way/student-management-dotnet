@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using StudentManagement.DTO;
 using StudentManagement.Models;
 using StudentManagement.Services.Interfaces;
 using StudentManagement.ViewModels;
@@ -38,14 +39,12 @@ public class StudentsController : Controller
                 SelectedCourse = course
             };
             
-            Console.WriteLine();
 
             return View(model);
         }
         catch (Exception ex)
         {
-            ViewBag.ErrorMessage = ex.Message;
-            return View("Error");
+            return BadRequest(ex.Message);
         }
     }
     
@@ -64,8 +63,33 @@ public class StudentsController : Controller
         }
         catch (Exception ex)
         {
-            ViewBag.ErrorMessage = ex.Message;
-            return View("Error");
+            return BadRequest(ex.Message);
         }
     }
+    
+    [HttpPost]
+public IActionResult Create([FromBody] StudentDTOs dto)
+{
+    if (!ModelState.IsValid) return BadRequest(ModelState);
+    _studentService.AddStudent(dto);
+    return Ok();
+}
+    
+    [HttpPost]
+    public IActionResult Update(StudentDTOs dto)
+    {
+        _studentService.UpdateStudent(dto);
+
+        return RedirectToAction("Index");
+    }
+    
+    [HttpPost]
+    public IActionResult Delete(int id)
+    {
+        _studentService.DeleteStudent(id);
+
+        return RedirectToAction("Index");
+    }
+
+
 }

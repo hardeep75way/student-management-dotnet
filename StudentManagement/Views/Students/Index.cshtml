@@ -18,8 +18,38 @@
             <button type="submit" class="btn btn-primary">
                 Filter
             </button>
+            <button onclick="openCreateModal()">Add Student</button>
+
         </form>
     </div>
+    <div id="createModal" style="display:none; background:#00000066; position:fixed; top:0; left:0; width:100%; height:100%;">
+
+        <div style="background:white; padding:20px; width:300px; margin:100px auto;">
+
+            <h3>Add Student</h3>
+
+            <form method="post" action="/Students/Create">
+
+                <label>Name</label>
+                <input name="Name" required />
+
+                <label>Course</label>
+                <input name="Course" required />
+
+                <label>Marks</label>
+                <input name="Marks" type="number" required />
+
+                <br><br>
+
+                <button type="submit">Save</button>
+                <button type="button" onclick="closeCreateModal()">Cancel</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
 
     <div class="col-md-8 text-end">
         <span class="text-muted">

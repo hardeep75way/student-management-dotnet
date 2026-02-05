@@ -2,6 +2,7 @@ using StudentManagement.Services;
 using StudentManagement.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using StudentManagement.Data;
+using StudentManagement.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +11,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IStudentService, StudentService>();
 // // builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
+{
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(8, 0, 34))
-    ));
+        ServerVersion.AutoDetect(
+            builder.Configuration.GetConnectionString("DefaultConnection")
+        )
+    );
+});
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
 var app = builder.Build();
 

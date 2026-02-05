@@ -9,5 +9,9 @@ namespace StudentManagement.Services.Interfaces
         List<StudentDTOs> GetStudentsByCourse(string course);
         StudentDTOs? GetStudentById(int id);
         int GetTotalStudents(string? course);
+
+        void AddStudent(StudentDTOs student);
+        void UpdateStudent(StudentDTOs student);
+        void DeleteStudent(int id);
     }
 }
