@@ -18,17 +18,19 @@
             <button type="submit" class="btn btn-primary">
                 Filter
             </button>
-            <button onclick="openCreateModal()">Add Student</button>
+            <button type="button" onclick="openStudentModal('create')">Add Student</button>
 
         </form>
     </div>
-    <div id="createModal" style="display:none; background:#00000066; position:fixed; top:0; left:0; width:100%; height:100%;">
+    <div id="studentModal" style="display:none; background:#00000066; position:fixed; top:0; left:0; width:100%; height:100%;">
 
         <div style="background:white; padding:20px; width:300px; margin:100px auto;">
 
-            <h3>Add Student</h3>
+            <h3 id="studentModalTitle">Add Student</h3>
 
-            <form method="post" action="/Students/Create">
+            <form id="studentForm">
+
+                <input name="Id" type="hidden" />
 
                 <label>Name</label>
                 <input name="Name" required />
@@ -41,8 +43,8 @@
 
                 <br><br>
 
-                <button type="submit">Save</button>
-                <button type="button" onclick="closeCreateModal()">Cancel</button>
+                <button type="submit" id="studentSubmitButton">Save</button>
+                <button type="button" onclick="closeStudentModal()">Cancel</button>
 
             </form>
 
@@ -88,3 +90,82 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    const studentModal = document.getElementById("studentModal");
+    const studentForm = document.getElementById("studentForm");
+    const studentModalTitle = document.getElementById("studentModalTitle");
+    const studentSubmitButton = document.getElementById("studentSubmitButton");
+    let studentFormMode = "create";
+
+    function openStudentModal(mode, button) {
+        studentFormMode = mode;
+        studentForm.reset();
+
+        if (mode === "edit" && button) {
+            const { id, name, course, marks } = button.dataset;
+            studentForm.elements["Id"].value = id;
+            studentForm.elements["Name"].value = name;
+            studentForm.elements["Course"].value = course;
+            studentForm.elements["Marks"].value = marks;
+            studentModalTitle.textContent = "Edit Student";
+            studentSubmitButton.textContent = "Update";
+        } else {
+            studentForm.elements["Id"].value = "";
+            studentModalTitle.textContent = "Add Student";
+            studentSubmitButton.textContent = "Save";
+        }
+
+        studentModal.style.display = "block";
+    }
+
+    function closeStudentModal() {
+        studentModal.style.display = "none";
+        studentForm.reset();
+    }
+
+    studentForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(studentForm);
+        const payload = {
+            id: Number(formData.get("Id") || 0),
+            name: formData.get("Name"),
+            course: formData.get("Course"),
+            marks: Number(formData.get("Marks"))
+        };
+
+        const url = studentFormMode === "edit" ? "/Students/Update" : "/Students/Create";
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            closeStudentModal();
+            window.location.reload();
+            return;
+        }
+
+        const message = await response.text();
+        alert(message || "Failed to save student.");
+    });
+
+    async function deleteStudent(id) {
+        if (!confirm("Delete this student?")) return;
+
+        const response = await fetch("/Students/Delete", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(id)
+        });
+
+        if (response.ok) {
+            window.location.reload();
+            return;
+        }
+
+        const message = await response.text();
+        alert(message || "Failed to delete student.");
+    }
+</script>

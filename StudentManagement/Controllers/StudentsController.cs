@@ -68,27 +68,33 @@ public class StudentsController : Controller
     }
     
     [HttpPost]
-public IActionResult Create([FromBody] StudentDTOs dto)
-{
-    if (!ModelState.IsValid) return BadRequest(ModelState);
-    _studentService.AddStudent(dto);
-    return Ok();
-}
-    
-    [HttpPost]
-    public IActionResult Update(StudentDTOs dto)
+    public IActionResult Create([FromBody] StudentDTOs dto)
     {
-        _studentService.UpdateStudent(dto);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
-        return RedirectToAction("Index");
+        _studentService.AddStudent(dto);
+
+        return Ok();
     }
     
     [HttpPost]
-    public IActionResult Delete(int id)
+    public IActionResult Update([FromBody] StudentDTOs dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        _studentService.UpdateStudent(dto);
+
+        return Ok();
+    }
+    
+    [HttpPost]
+    public IActionResult Delete([FromBody] int id)
     {
         _studentService.DeleteStudent(id);
 
-        return RedirectToAction("Index");
+        return Ok();
     }
 
 

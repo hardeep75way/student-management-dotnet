@@ -25,5 +25,19 @@
            ">
             View
         </a>
+        <button type="button"
+                class="btn btn-sm btn-outline-secondary ms-1"
+                onclick="openStudentModal('edit', this)"
+                data-id="@Model.Id"
+                data-name="@Model.Name"
+                data-course="@Model.Course"
+                data-marks="@Model.Marks">
+            Edit
+        </button>
+        <button type="button"
+                class="btn btn-sm btn-outline-danger ms-1"
+                onclick="deleteStudent(@Model.Id)">
+            Delete
+        </button>
     </td>
 </tr>
